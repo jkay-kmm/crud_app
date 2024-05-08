@@ -1,7 +1,6 @@
 import 'dart:ui';
 
-import 'package:sqflite/sqflite.dart' as sql; // Use alias 'sql' to avoid confusion
-import 'package:path/path.dart'; // For handling database paths
+import 'package:sqflite/sqflite.dart' as sql; // Use alias 'sql' to avoid confusion // For handling database paths
 
 class SQLHelper {
   static Future<void> createTables(sql.Database database) async {
@@ -28,7 +27,7 @@ class SQLHelper {
     conflictAlgorithm: sql.ConflictAlgorithm.replace);
     return id;
   }
-  static Future<List<Map<String,dynamic>>> getData()async{
+  static Future<List<Map<String,dynamic>>> getAllData()async{
     final db = await SQLHelper.db();
     return db.query('data', orderBy: 'id');
   }
@@ -43,7 +42,7 @@ class SQLHelper {
       'desc' :desc,
       'createAt' : DateTime.now().toString()
     };
-    final result = await db.update('data', data, , where:'id = ?',whereArgs: [id]);
+    final result = await db.update('data', data, where:'id = ?',whereArgs: [id]);
     return result;
   }
   static Future<void> deleteData(int id) async{
